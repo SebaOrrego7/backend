@@ -1,19 +1,30 @@
 import { Controller, Get, Post, UseGuards, Request, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
+import { LocalAuthGuard } from './auth/local-auth.guard';
+import { AuthService } from './auth/auth.service';
 
 @Controller()
 export class AppController {
-  getHello(): any {
-    throw new Error('Method not implemented.');
-  }
-  constructor(private readonly appService: AppService) {}
 
+  constructor(private readonly appService: AppService , private authService: AuthService) {
+  }
+
+   //@UseGuards(LocalAuthGuard)
+  @Post('auth/login')
+  async login(@Request() req) {
+    console.log(req.body)
+    return this.authService.login(req.body);
+  }
+  
   @Post()
     helloPost(@Body() Body: any): any{
       return Body;
     }
-  /*@Get()
+
+
+  
+    /*@Get()
   getHello(): string {
     return this.appService.getHello();
   }*/
