@@ -24,10 +24,10 @@ export class AppController {
 
 
   
-    /*@Get()
+    @Get()
   getHello(): string {
     return this.appService.getHello();
-  }*/
+  }
 
  /* @UseGuards(AuthGuard('local'))
   @Post('auth/login')
